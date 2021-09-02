@@ -6,11 +6,11 @@ import {
   Checkbox,
   TextField,
   Grid,
+  Autocomplete,
 } from "@material-ui/core";
 import { Draggable } from "react-beautiful-dnd";
 import { useDispatch, useSelector } from "react-redux";
 import useEditMode from "../hooks/useEditMode";
-import { ITodo } from "../types/todo";
 import { ActionType } from "../types/todoActions";
 
 import DeleteIcon from "@material-ui/icons/Delete";
@@ -19,6 +19,8 @@ import CancelIcon from "@material-ui/icons/Cancel";
 import CheckIcon from "@material-ui/icons/Check";
 
 import styled from "styled-components";
+import ITodo from "../types/ITodo";
+import IRespList from "../types/IRespList";
 
 const MyLayout = styled.div`
   display: flex;
@@ -32,13 +34,17 @@ const MyText = styled.div<{ done: boolean }>`
 `;
 
 function TodoItem({ id, index }: { id: string; index: number }) {
-  const todo: ITodo = useSelector((state: any) => state.todos.todos[id]);
+  const todo: ITodo = useSelector((state: any) => state.todos[id]);
+  const resps: IRespList = useSelector((state: any) => state.resps);
+  const link = useSelector((state: any) => state.link);
 
   const dispatch = useDispatch();
   const remove = () => dispatch({ type: ActionType.REMOVE, id: id });
   const edit = (text: string) =>
     dispatch({ type: ActionType.EDIT, text: text, id: id });
   const toggleDone = () => dispatch({ type: ActionType.TOGGLE_DONE, id: id });
+  const selectResps = (resps: any) =>
+    dispatch({ type: ActionType.SELECT_RESP, id: id, resps: resps });
 
   const {
     text,
@@ -102,6 +108,25 @@ function TodoItem({ id, index }: { id: string; index: number }) {
                     </div>
                     <MyText done={todo.done}>{todo.todo}</MyText>
                   </MyLayout>
+
+                  <Autocomplete
+                    value={link[id]}
+                    onChange={(event: any, data: any) => selectResps(data)}
+                    multiple
+                    fullWidth
+                    options={Object.keys(resps)}
+                    getOptionLabel={(option) =>
+                      resps[option].firstName + " " + resps[option].name
+                    }
+                    renderInput={(params) => (
+                      <TextField
+                        {...params}
+                        margin="normal"
+                        variant="standard"
+                        label="Responsables"
+                      />
+                    )}
+                  />
                 </CardContent>
                 <CardActions>
                   <Button

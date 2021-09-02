@@ -15,7 +15,6 @@ function useEditMode(initialValue: string, callback: any) {
   };
 
   const cancelEdition = () => {
-    console.log(initialValue);
     setText(initialValue);
     setEditMode(false);
   };

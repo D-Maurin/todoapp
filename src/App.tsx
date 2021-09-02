@@ -8,6 +8,7 @@ import TodoPage from "./components/pages/TodoPage";
 import RespPage from "./components/pages/RespPage";
 
 import Navigation from "./components/Navigation";
+import EditRespPage from "./components/pages/EditRespPage";
 
 function App() {
   return (
@@ -22,8 +23,11 @@ function App() {
           <Route exact path="/todo">
             <TodoPage />
           </Route>
-          <Route path="/resps">
+          <Route exact path="/resps">
             <RespPage />
+          </Route>
+          <Route exact path="/resps/:id">
+            <EditRespPage />
           </Route>
         </Switch>
       </Router>

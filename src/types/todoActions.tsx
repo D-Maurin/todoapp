@@ -7,6 +7,9 @@ export enum ActionType {
   TOGGLE_DONE,
   REORDER,
   ADD_RESP,
+  SELECT_RESP,
+  EDIT_RESP,
+  REMOVE_RESP,
 }
 
 export interface IAction extends Action {

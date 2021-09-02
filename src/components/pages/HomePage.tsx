@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
 import styled from "styled-components";
-import { ITodoList } from "../../types/todo";
+import ITodoList from "../../types/ITodoList";
 
 const Title = styled.div`
   display: flex;
@@ -17,17 +17,20 @@ const TitleText = styled.div`
 `;
 
 function HomePage() {
-  const state: ITodoList = useSelector((state: any) => state.todos);
+  const state: ITodoList = useSelector((state: any) => state);
+
+  const nTodos = Object.keys(state.todos).length;
+  const nResps = Object.keys(state.resps).length;
 
   return (
     <>
       <Title>
-        <BigNum>{Object.keys(state.todos).length}</BigNum>
-        <TitleText>todos</TitleText>
+        <BigNum>{nTodos}</BigNum>
+        <TitleText>todo{nTodos > 1 ? "s" : ""}</TitleText>
       </Title>
       <Title>
-        <BigNum>{Object.keys(state.resps).length}</BigNum>
-        <TitleText>responsables</TitleText>
+        <BigNum>{nResps}</BigNum>
+        <TitleText>responsables{nResps > 1 ? "s" : ""}</TitleText>
       </Title>
     </>
   );

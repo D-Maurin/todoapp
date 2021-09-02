@@ -1,13 +1,14 @@
-import { ITodo, ITodoList } from "../types/todo";
 import TodoItem from "./TodoItem";
 import { DragDropContext, Droppable, DropResult } from "react-beautiful-dnd";
 import { useDispatch, useSelector } from "react-redux";
 import { ActionType } from "../types/todoActions";
 import { Grid } from "@material-ui/core";
+import ITodoList from "../types/ITodoList";
+import ITodo from "../types/ITodo";
 
 function TodoList() {
   const dispatch = useDispatch();
-  const todoList: ITodoList = useSelector((state: any) => state.todos);
+  const todoList: ITodoList = useSelector((state: any) => state);
 
   const handleDragEnd = (result: DropResult) => {
     if (result.destination)

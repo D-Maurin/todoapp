@@ -17,8 +17,6 @@ function ControlledTextInput(props: any) {
     rules: { required: true },
   });
 
-  console.log(error);
-
   return (
     <LocalizationProvider
       dateAdapter={AdapterMoment}

@@ -1,4 +1,4 @@
-import { ITodoList } from "../../types/todo";
+import ITodoList from "../../types/ITodoList";
 
 const todosExample: ITodoList = {
   todos: {
@@ -23,6 +23,7 @@ const todosExample: ITodoList = {
       address: "1 Route de Beauvallon, 26800 Etoile/Rhône",
     },
   },
+  link: { "0": ["0"], "1": ["1"], "2": ["0", "1"], "3": [], "4": [] },
 };
 
 export default todosExample;
