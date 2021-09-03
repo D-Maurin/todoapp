@@ -1,6 +1,5 @@
 import {
   AppBar,
-  Button,
   Divider,
   Drawer,
   IconButton,
@@ -13,6 +12,7 @@ import {
 } from "@material-ui/core";
 
 import MenuIcon from "@material-ui/icons/Menu";
+import MapIcon from "@material-ui/icons/Map";
 import HomeIcon from "@material-ui/icons/Home";
 import FormatListBulletedIcon from "@material-ui/icons/FormatListBulleted";
 import PersonIcon from "@material-ui/icons/Person";
@@ -90,6 +90,19 @@ function Navigation() {
               <PersonIcon />
             </ListItemIcon>
             <ListItemText>Responsables</ListItemText>
+          </ListItem>
+
+          <ListItem
+            button
+            onClick={() => {
+              history.push("/map");
+              setOpen(false);
+            }}
+          >
+            <ListItemIcon>
+              <MapIcon />
+            </ListItemIcon>
+            <ListItemText>Carte</ListItemText>
           </ListItem>
         </MyList>
       </Drawer>

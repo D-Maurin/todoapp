@@ -1,4 +1,5 @@
-import { Autocomplete, TextField } from "@material-ui/core";
+import { Autocomplete, CircularProgress, TextField } from "@material-ui/core";
+import React from "react";
 import { useController } from "react-hook-form";
 import useAddressAutocomplete from "../../hooks/useAddressAutocomplete";
 
@@ -34,6 +35,17 @@ function ControlledAddressInput(props: any) {
           {...params}
           {...otherProps}
           variant="standard"
+          InputProps={{
+            ...params.InputProps,
+            endAdornment: (
+              <React.Fragment>
+                {loading ? (
+                  <CircularProgress color="inherit" size={20} />
+                ) : null}
+                {params.InputProps.endAdornment}
+              </React.Fragment>
+            ),
+          }}
         />
       )}
       onChange={(_, data) => {

@@ -9,7 +9,7 @@ import {
   Autocomplete,
 } from "@material-ui/core";
 import { Draggable } from "react-beautiful-dnd";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import useEditMode from "../hooks/useEditMode";
 import { ActionType } from "../types/todoActions";
 
@@ -21,6 +21,9 @@ import CheckIcon from "@material-ui/icons/Check";
 import styled from "styled-components";
 import ITodo from "../types/ITodo";
 import IRespList from "../types/IRespList";
+import useResps from "../hooks/useResps";
+import useLink from "../hooks/useLink";
+import useTodo from "../hooks/useTodo";
 
 const MyLayout = styled.div`
   display: flex;
@@ -34,9 +37,9 @@ const MyText = styled.div<{ done: boolean }>`
 `;
 
 function TodoItem({ id, index }: { id: string; index: number }) {
-  const todo: ITodo = useSelector((state: any) => state.todos[id]);
-  const resps: IRespList = useSelector((state: any) => state.resps);
-  const link = useSelector((state: any) => state.link);
+  const todo: ITodo = useTodo(id);
+  const resps: IRespList = useResps();
+  const link = useLink();
 
   const dispatch = useDispatch();
   const remove = () => dispatch({ type: ActionType.REMOVE, id: id });

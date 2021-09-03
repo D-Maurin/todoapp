@@ -1,5 +1,5 @@
-import { useSelector } from "react-redux";
 import styled from "styled-components";
+import useTodoList from "../../hooks/useTodoList";
 import ITodoList from "../../types/ITodoList";
 
 const Title = styled.div`
@@ -17,7 +17,7 @@ const TitleText = styled.div`
 `;
 
 function HomePage() {
-  const state: ITodoList = useSelector((state: any) => state);
+  const state: ITodoList = useTodoList();
 
   const nTodos = Object.keys(state.todos).length;
   const nResps = Object.keys(state.resps).length;
@@ -30,7 +30,7 @@ function HomePage() {
       </Title>
       <Title>
         <BigNum>{nResps}</BigNum>
-        <TitleText>responsables{nResps > 1 ? "s" : ""}</TitleText>
+        <TitleText>responsable{nResps > 1 ? "s" : ""}</TitleText>
       </Title>
     </>
   );

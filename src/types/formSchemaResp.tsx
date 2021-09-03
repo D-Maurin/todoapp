@@ -3,7 +3,7 @@ import * as yup from "yup";
 const formSchemaResp = yup.object().shape({
   name: yup.string().required("Le nom est requis"),
   firstName: yup.string().required("Le prénom est requis"),
-  address: yup.string().required("L'adresse est requise"),
+  address: yup.object().nullable().required("L'adresse est requise"),
   birthday: yup
     .date()
     .nullable()

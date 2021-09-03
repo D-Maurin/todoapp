@@ -15,6 +15,7 @@ function ControlledTextInput(props: any) {
     name,
     control,
     rules: { required: true },
+    defaultValue: null,
   });
 
   return (
@@ -27,13 +28,13 @@ function ControlledTextInput(props: any) {
         inputRef={ref}
         renderInput={(params) => (
           <TextField
+            {...params}
+            {...inputProps}
+            {...otherProps}
             error={error}
             helperText={error?.message}
             fullWidth
             autoComplete="off"
-            {...params}
-            {...inputProps}
-            {...otherProps}
           />
         )}
       />

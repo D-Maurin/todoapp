@@ -11,6 +11,7 @@
     "@material-ui/icons": "^4.11.2",
     "@material-ui/lab": "^5.0.0-alpha.44",
     "@material-ui/styled-engine-sc": "^5.0.0-beta.5",
+    "@react-leaflet/core": "1.0.2",
     "@reduxjs/toolkit": "^1.6.1",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
@@ -20,6 +21,7 @@
     "@types/react": "^17.0.0",
     "@types/react-beautiful-dnd": "^13.1.1",
     "@types/react-dom": "^17.0.0",
+    "@types/react-leaflet": "^2.8.2",
     "@types/react-redux": "^7.1.18",
     "@types/react-router": "^5.1.16",
     "@types/react-router-dom": "^5.1.8",
@@ -27,6 +29,7 @@
     "@types/uuid": "^8.3.1",
     "axios": "^0.21.1",
     "date-fns": "^2.23.0",
+    "leaflet": "^1.7.1",
     "material-ui": "^0.20.2",
     "moment": "^2.29.1",
     "react": "^17.0.2",
@@ -34,6 +37,7 @@
     "react-dom": "^17.0.2",
     "react-hook-form": "^7.14.2",
     "react-is": "^17.0.2",
+    "react-leaflet": "3.1.0",
     "react-router-dom": "^5.2.1",
     "react-scripts": "4.0.3",
     "react-table": "^7.7.0",
@@ -66,5 +70,6 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "resolutions": { "react-leaflet/@react-leaflet/core": "1.0.2" }
 }

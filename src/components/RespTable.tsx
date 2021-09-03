@@ -1,7 +1,4 @@
 import {
-  Button,
-  Container,
-  IconButton,
   Paper,
   Table,
   TableBody,
@@ -12,17 +9,16 @@ import {
 } from "@material-ui/core";
 import moment from "moment";
 import { useMemo } from "react";
-import { useSelector } from "react-redux";
 // @ts-ignore
-import { Column, useSortBy, useTable } from "react-table";
+import { Column, useSortBy, useTable, useGlobalFilter } from "react-table";
 
 import ArrowDownwardIcon from "@material-ui/icons/ArrowDownward";
 import styled from "styled-components";
 
-import EditIcon from "@material-ui/icons/Edit";
-import DeleteIcon from "@material-ui/icons/Delete";
-import { useHistory } from "react-router";
-import useRemoveResp from "../hooks/useRemoveResp";
+import RowOptions from "./RowOptions";
+import GlobalFilter from "./reusable/GlobalFilter";
+import useResps from "../hooks/useResps";
+import useLink from "../hooks/useLink";
 
 const SortArrow = styled(ArrowDownwardIcon)<{ sorton: boolean; up: boolean }>`
   vertical-align: bottom;
@@ -43,12 +39,8 @@ const buildData = (resps: any, link: any) => {
 };
 
 function RespTable() {
-  const history = useHistory();
-
-  const resps: any = useSelector((state: any) => state.resps);
-  const link: any = useSelector((state: any) => state.link);
-
-  const removeResp = useRemoveResp();
+  const resps = useResps();
+  const link = useLink();
 
   const data = useMemo(() => buildData(resps, link), [resps, link]) as any;
   const columns: Array<Column<any>> = useMemo(
@@ -70,7 +62,7 @@ function RespTable() {
       },
       {
         Header: "Adresse",
-        accessor: "address",
+        accessor: "address.label",
       },
       {
         Header: "Nb de tâches",
@@ -79,36 +71,38 @@ function RespTable() {
       {
         Header: "",
         accessor: "id",
-        Cell: ({ value }: any) => {
-          return (
-            <>
-              <IconButton
-                onClick={() => {
-                  history.push("/resps/" + value);
-                }}
-              >
-                <EditIcon></EditIcon>
-              </IconButton>
-
-              <IconButton onClick={() => removeResp(value)}>
-                <DeleteIcon></DeleteIcon>
-              </IconButton>
-            </>
-          );
-        },
+        Cell: RowOptions,
       },
     ],
-    [history]
+    []
   );
 
-  const tableInstance = useTable({ columns, data }, useSortBy);
-  const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
-    tableInstance;
+  const tableInstance = useTable({ columns, data }, useGlobalFilter, useSortBy);
+  const {
+    getTableProps,
+    getTableBodyProps,
+    headerGroups,
+    rows,
+    prepareRow,
+    state: { globalFilter },
+    visibleColumns,
+    preGlobalFilteredRows,
+    setGlobalFilter,
+  } = tableInstance;
 
   return (
     <TableContainer component={Paper}>
       <Table {...getTableProps()}>
         <TableHead>
+          <TableRow>
+            <TableCell colSpan={visibleColumns.length}>
+              <GlobalFilter
+                preGlobalFilteredRows={preGlobalFilteredRows}
+                globalFilter={globalFilter}
+                setGlobalFilter={setGlobalFilter}
+              ></GlobalFilter>
+            </TableCell>
+          </TableRow>
           {
             // Loop over the header rows
             headerGroups.map((headerGroup: any) => (

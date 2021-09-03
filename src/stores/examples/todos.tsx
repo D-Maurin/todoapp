@@ -14,13 +14,21 @@ const todosExample: ITodoList = {
       name: "Maurin",
       firstName: "Denis",
       birthday: new Date("2000-10-11"),
-      address: "17 Rue Saint François, La rochelle",
+      address: {
+        label: "17 Rue Saint-Francois 17000 La Rochelle",
+        lat: 46.162438,
+        lng: -1.144241,
+      },
     },
     "1": {
       name: "Dupont",
       firstName: "Jean",
       birthday: new Date("1990-01-01"),
-      address: "1 Route de Beauvallon, 26800 Etoile/Rhône",
+      address: {
+        label: "1 Route de Beauvallon 26800 Étoile-sur-Rhône",
+        lat: 44.839519,
+        lng: 4.890161,
+      },
     },
   },
   link: { "0": ["0"], "1": ["1"], "2": ["0", "1"], "3": [], "4": [] },

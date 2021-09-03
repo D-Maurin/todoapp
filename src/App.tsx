@@ -9,6 +9,7 @@ import RespPage from "./components/pages/RespPage";
 
 import Navigation from "./components/Navigation";
 import EditRespPage from "./components/pages/EditRespPage";
+import MapPage from "./components/pages/MapPage";
 
 function App() {
   return (
@@ -28,6 +29,9 @@ function App() {
           </Route>
           <Route exact path="/resps/:id">
             <EditRespPage />
+          </Route>
+          <Route exact path="/map">
+            <MapPage />
           </Route>
         </Switch>
       </Router>

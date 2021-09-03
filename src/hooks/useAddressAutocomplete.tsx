@@ -26,9 +26,13 @@ function useAddressAutocomplete() {
             },
           }
         );
-        const newOptions = answer.data.features.map(
-          (k: any) => k.properties.label
-        );
+        const newOptions = answer.data.features.map((k: any) => {
+          return {
+            label: k.properties.label,
+            lat: k.geometry.coordinates[1],
+            lng: k.geometry.coordinates[0],
+          };
+        });
 
         if (active) {
           if (newOptions.length) setOptions(newOptions);

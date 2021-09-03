@@ -1,10 +1,10 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Box, Button, Container } from "@material-ui/core";
 import { useForm } from "react-hook-form";
-import { useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router";
 import styled from "styled-components";
 import useEditResp from "../../hooks/useEditResp";
+import useResp from "../../hooks/useResp";
 import formSchemaResp from "../../types/formSchemaResp";
 import IResp from "../../types/IResp";
 import RespForm from "../RespForm";
@@ -21,7 +21,7 @@ function EditRespPage() {
   const { id } = useParams() as any;
   const history = useHistory();
 
-  const resp = useSelector((state: any) => state.resps[id]);
+  const resp = useResp(id);
   const editResp = useEditResp();
 
   const { control, handleSubmit } = useForm({
